@@ -9,3 +9,16 @@ html {
   background-color: #000;
   color: #fff;
 }
+
+.input {
+  color-scheme: dark;
+  @apply bg-black text-white outline-none;
+  @apply border border-zinc-700 py-2 px-3;
+  @apply rounded-md focus:border-zinc-300;
+}
+
+.btn {
+  @apply flex items-center gap-2;
+  @apply text-white outline-none;
+  @apply py-2 px-4 rounded-md;
+}
