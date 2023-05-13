@@ -1,10 +1,10 @@
 import { IconBrandGoogle } from "@tabler/icons-react";
+import { useContext } from "react";
 import MenuItem from "./MenuItem";
+import AuthenticationContext from "@/data/context/AuthenticationContext";
 
 export default function Menu() {
-  function loginGoogle() {
-    console.log("Login realizado com sucesso");
-  }
+  const { loginGoogle } = useContext(AuthenticationContext);
 
   return (
     <div>

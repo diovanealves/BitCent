@@ -1,32 +1,46 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Transaction from "@/logic/core/finance/Transaction";
-import FakeTransactions from "../constants/FakeTransactions";
 import Id from "@/logic/core/comum/Id";
+import services from "@/logic/core";
+import AuthenticationContext from "../context/AuthenticationContext";
 
 export default function useTransaction() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const { user } = useContext(AuthenticationContext);
 
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [transaction, setTransaction] = useState<Transaction | null>(null);
 
-  useEffect(searchTransactions, []);
+  const searchTransactions = useCallback(
+    async function () {
+      if (!user) return;
+      const queryingTransactions = await services.finances.consult(user);
+      setTransactions(queryingTransactions);
+    },
+    [user]
+  );
 
-  function searchTransactions() {
-    setTransactions(FakeTransactions);
-  }
+  useEffect(() => {
+    searchTransactions();
+  }, [searchTransactions]);
 
-  function save(transaction: Transaction) {
+  async function save(transaction: Transaction) {
+    if (!user) return;
     const other = transactions.filter((t) => t.id != transaction.id);
     setTransactions([
       ...other,
       { ...transaction, id: transaction.id ?? Id.new() },
     ]);
+
+    services.finances.save(transaction, user);
     setTransaction(null);
+    await searchTransactions();
   }
 
-  function remove(transaction: Transaction) {
-    const other = transactions.filter((t) => t.id != transaction.id);
-    setTransactions([...other]);
+  async function remove(transaction: Transaction) {
+    if (!user) return;
+    await services.finances.delete(transaction, user);
     setTransaction(null);
+    await searchTransactions();
   }
 
   function select(transaction: Transaction) {
