@@ -4,9 +4,11 @@ import Id from "@/logic/core/comum/Id";
 import services from "@/logic/core";
 import AuthenticationContext from "../context/AuthenticationContext";
 
+export type DisplayType = "List" | "Grid";
+
 export default function useTransaction() {
   const { user } = useContext(AuthenticationContext);
-
+  const [displayType, setDisplayType] = useState<DisplayType>("List");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [transaction, setTransaction] = useState<Transaction | null>(null);
 
@@ -51,5 +53,14 @@ export default function useTransaction() {
     setTransaction(null);
   }
 
-  return { transactions, transaction, save, remove, select, cancel };
+  return {
+    transactions,
+    transaction,
+    displayType,
+    save,
+    remove,
+    select,
+    cancel,
+    changeDisplay: setDisplayType,
+  };
 }
