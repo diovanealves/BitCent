@@ -3,7 +3,7 @@ import Testimony from "./Testimony";
 
 export default function Testimonials() {
   return (
-    <Area className="bg-gradient-to-r from-black via-zinc-900 to-black py-10 sm:py-20">
+    <Area id="Testimonial" className="bg-gradient-to-r from-black via-zinc-900 to-black py-10 sm:py-20">
       <div className="flex flex-col justify-center items-center">
         <h2 className="font-thin text-zinc-600 text-2xl sm:text-4xl mb-11 text-center">
           As pessoas estão dizendo...

@@ -6,7 +6,7 @@ import Perks3 from "../../../../public/Perks3.jpg";
 
 export default function Perks() {
   return (
-    <Area className="bg-black py-16 sm:py-36">
+    <Area id="Benefits" className="bg-black py-16 sm:py-36">
       <div className="flex flex-col items-center gap-y-16 sm:gap-y-36">
         <Perk
           image={Perks1}
