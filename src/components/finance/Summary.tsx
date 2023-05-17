@@ -33,17 +33,26 @@ export default function Summary(props: SummaryProps) {
         title="Receitas"
         value={Recipes}
         icon={<IconCash />}
-        iconClassName="text-green-500"
+        className="bg-gradient-to-r from-green-700 to-green-500 border-green-500 "
+        iconClassName="text-white"
       />
       <SummaryItem
         title="Despesas"
         value={Expenses}
         icon={<IconCreditCard />}
-        iconClassName="text-red-500"
+        className="bg-gradient-to-r from-red-700 to-red-500 border-red-500 "
+        iconClassName="text-white"
       />
       <SummaryItem
         title="Total"
         value={totalValue}
+        className={
+          totalValue > 0
+            ? "border-green-500"
+            : totalValue < 0
+            ? "border-red-500"
+            : ""
+        }
         valueClassName={
           totalValue > 0
             ? "text-green-500"
