@@ -43,10 +43,12 @@ export default class Authentication {
     if (!userFirebase?.email) return null;
 
     const alternativeName = userFirebase.email!.split("@")[0];
+
     return {
       id: userFirebase.uid,
       name: userFirebase.displayName ?? alternativeName,
       email: userFirebase.email,
+      avatar: userFirebase.photoURL ?? "",
     };
   }
 }
