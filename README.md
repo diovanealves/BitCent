@@ -51,7 +51,7 @@ service cloud.firestore {
     	allow read, write: if false;
     }
 
-    match /financas/{email}/transacoes/{id} {
+    match /finance/{email}/transactions/{id} {
   		allow read: if (request.auth != null && request.auth.token.email == email);
       allow write: if (request.auth != null && request.auth.token.email == email);
     }
