@@ -1,38 +1,104 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center"> Bitcent - Controle Financeiro</h1>
 
-## Getting Started
+<p align="center">Bitcent é uma aplicação web para controle de finanças pessoais com landing page e dashboard. O projeto utiliza o Firebase para autenticação e armazenamento de dados.</p>
 
-First, run the development server:
+| :placard: Vitrine.Dev |                                         |
+| --------------------- | --------------------------------------- |
+| :sparkles: Nome       | **Bitcent - Controle Financeiro**       |
+| :label: Tecnologias   | NextJS, TailwindCSS, Mantine, Firebase  |
+| :rocket: URL          | bitcent-diovane.vercel.app/             |
+| :fire: Repositorio    | https://github.com/diovanealves/BitCent |
+
+![](.github/cover.svg#vitrinedev)
+
+<p align="center">
+<img src=".github/logo.png" alt="Logo" width="100" />
+</p>
+
+<p align="center">Projeto foi desenvolvido durante a <a href="https://transformacao.dev/">Semana Tranformação.DEV</a>, que ocorreu nos dias 8 a 12 de Maio de 2023.</p>
+
+<br>
+
+## Tecnologias
+
+Lista de tecnologias utilizadas no projeto:
+
+- [React](https://reactjs.org)
+- [Next.js](https://nextjs.org/)
+- [Firebase](https://firebase.google.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Mantine](https://mantine.dev/)
+
+## Executando o projeto
+
+1. Clone o repositório:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+$ git clone https://github.com/diovanealves/BitCent
+$ cd Bitcent
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Crie um projeto no Firebase e ative o Firestore e Autenticação com Google.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Permissões do Firestore:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+    	allow read, write: if false;
+    }
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    match /financas/{email}/transacoes/{id} {
+  		allow read: if (request.auth != null && request.auth.token.email == email);
+      allow write: if (request.auth != null && request.auth.token.email == email);
+    }
+  }
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. É preciso criar um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
-## Learn More
+```bash
+NEXT_PUBLIC_FIREBASE_PROJECTID=
+NEXT_PUBLIC_FIREBASE_AUTHDOMAIN=
+NEXT_PUBLIC_FIREBASE_APIKEY=
+```
 
-To learn more about Next.js, take a look at the following resources:
+Usar as credenciais do seu projeto no Firebase.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Dentro da pasta do projeto, execute os comandos abaixo:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+# Instalar as dependências
+$ npm install
 
-## Deploy on Vercel
+# Iniciar o projeto
+$ npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O app estará disponível no endereço http://localhost:3000.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h2 align="center">🤝 Colaboradores</h2>
+<table>
+  <tr>
+    <td>
+        <img src="https://avatars.githubusercontent.com/u/87160050?v=4" width="100px;" alt="Foto do Diovane Alves no GitHub"/>
+            <a href="https://github.com/diovanealves" style="color:#4f46e5" align="center">
+                <p>Github</p>
+            </a>
+            <a href="https://www.linkedin.com/in/diovane-alves-de-oliveira-5320a0217/" style="color:#4f46e5" align="center">
+                <p>Linkedin</p>
+            </a>
+            <a href="https://twitter.com/deluxyfps" style="color:#4f46e5" align="center">
+                <p>Twitter</p>
+            </a>
+    </td>
+  </tr>
+</table>
+
+## License
+
+Esse projeto está sob a [licença MIT](LICENSE.md).
