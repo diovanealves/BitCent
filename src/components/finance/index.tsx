@@ -24,6 +24,14 @@ export default function Finance() {
     cancel,
   } = useTransaction();
 
+  function renderTransaction() {
+    return displayType === "List" ? (
+      <List transactions={transactions} selectTransaction={select} />
+    ) : (
+      <Grid transactions={transactions} selectTransaction={select} />
+    );
+  }
+
   return (
     <Page>
       <Header />
@@ -53,10 +61,8 @@ export default function Finance() {
             save={save}
             remove={remove}
           />
-        ) : transactions.length && displayType === "List" ? (
-          <List transactions={transactions} selectTransaction={select} />
-        ) : displayType === "Grid" ? (
-          <Grid transactions={transactions} selectTransaction={select} />
+        ) : transactions.length > 0 ? (
+          renderTransaction()
         ) : (
           <NotFound>Nenhuma transação encontrada</NotFound>
         )}
