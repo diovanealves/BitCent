@@ -6,7 +6,7 @@
 | --------------------- | --------------------------------------- |
 | :sparkles: Nome       | **Bitcent - Controle Financeiro**       |
 | :label: Tecnologias   | NextJS, TailwindCSS, Mantine, Firebase  |
-| :rocket: URL          | bitcent-diovane.vercel.app/             |
+| :rocket: URL          | https://bitcent-diovane.vercel.app/            |
 | :fire: Repositorio    | https://github.com/diovanealves/BitCent |
 
 ![](.github/cover.svg#vitrinedev)
